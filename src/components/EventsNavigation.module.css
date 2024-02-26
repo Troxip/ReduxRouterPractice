@@ -22,7 +22,3 @@
 .list a.active {
   background-color: var(--color-primary-600);
 }
-
-.active {
-  background-color: red;
-}
