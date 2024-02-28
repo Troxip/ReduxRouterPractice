@@ -1,5 +1,6 @@
 import { useRouteError } from "react-router-dom";
 import PageContent from "../components/PageContent";
+import MainNavigation from "../components/MainNavigation";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -15,8 +16,11 @@ export default function ErrorPage() {
     message = "Could not find resource or page.";
   }
   return (
-    <PageContent title="An error occurred!">
-      <p>Something went wrong!</p>
-    </PageContent>
+    <>
+      <MainNavigation />
+      <PageContent title={title}>
+        <p>{message}</p>
+      </PageContent>
+    </>
   );
 }
