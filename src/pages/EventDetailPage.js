@@ -16,12 +16,12 @@ export default function EventDetailPage() {
     <>
       <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
         <Await resolve={event}>
-          {(loadedEvent) => <EventItem event={loadEvent} />}
+          {(loadedEvent) => <EventItem event={loadedEvent} />}
         </Await>
       </Suspense>
       <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
         <Await resolve={events}>
-          {(loadedEvents) => <EventsList events={events} />}
+          {(loadedEvents) => <EventsList events={loadedEvents} />}
         </Await>
       </Suspense>
     </>
@@ -30,12 +30,9 @@ export default function EventDetailPage() {
 
 async function loadEvent(id) {
   const response = await fetch("http://localhost:8080/events");
+
   if (!response.ok) {
-    // return { isError: true, message: "Could not fetch events data" };
-    // throw new Response(JSON.stringify({ message: "Could not fetch events." }), {
-    //   status: 500,
-    // });
-    return json(
+    throw json(
       { message: "Could not fetch events." },
       {
         status: 500,
@@ -55,7 +52,7 @@ async function loadEvents() {
       // throw new Response(JSON.stringify({ message: "Could not fetch events." }), {
       //   status: 500,
       // });
-      return json(
+      throw json(
         { message: "Could not fetch events." },
         {
           status: 500,
